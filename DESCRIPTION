@@ -1,0 +1,17 @@
+Package: biox
+Type: Package
+Title: bio base tools
+Version: 1.0
+Date: 2018-04-17
+Author: bobo
+Maintainer: bobo <529063092@qq.com>
+Description: bio base tools
+License: GPL (>= 2)
+LazyData: TRUE
+RoxygenNote: 6.0.1
+Imports: 
+  Rcpp (>= 0.12.16),
+  stringr
+VignetteBuilder: knitr
+LinkingTo: Rcpp, RcppParallel
+SystemRequirements: GNU make
