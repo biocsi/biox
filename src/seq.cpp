@@ -13,7 +13,7 @@ String revcomp_(String s){
 //' reverse complement seq
 //' @param ss seq vectors
 //' @examples
-//' revcom(c("AGCT", "AAAA"))
+//' revcomp(c("AGCT", "AAAA"))
 //' 
 //' @export
 // [[Rcpp::export]]
@@ -45,20 +45,19 @@ StringVector kmers(String s, int k = 3) {
   if(len < k ) { stop("error, string' len must longer than k"); }
   
   StringVector kms(len-k+1);
+  char *p2_begin, *p2;
+  p2 = p2_begin = new char[len+1];
+  strcpy(p2, p);
   
-  #pragma omp parallel for
   for(int offset = 0; offset <= len - k ; offset++){
-    char *p2_begin, *p2;
-    p2 = p2_begin = new char[len+1];
-    strcpy(p2, p);
     // Rprintf("offset: %d\n", offset);
     p2 = p2_begin + offset;
     p2[k] = '\0';
     String si(p2);
     kms[offset] = si;
     p2[k] = p[k];
-    delete[] p2_begin;
   }
   
+  delete[] p2_begin;
   return kms;
 }
