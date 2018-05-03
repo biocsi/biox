@@ -5,6 +5,28 @@
 
 using namespace Rcpp;
 
+// read_fa
+DataFrame read_fa(String file);
+RcppExport SEXP _biox_read_fa(SEXP fileSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< String >::type file(fileSEXP);
+    rcpp_result_gen = Rcpp::wrap(read_fa(file));
+    return rcpp_result_gen;
+END_RCPP
+}
+// read_fq
+DataFrame read_fq(String file);
+RcppExport SEXP _biox_read_fq(SEXP fileSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< String >::type file(fileSEXP);
+    rcpp_result_gen = Rcpp::wrap(read_fq(file));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rcpp_hello_world
 List rcpp_hello_world();
 RcppExport SEXP _biox_rcpp_hello_world() {
@@ -64,6 +86,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_biox_read_fa", (DL_FUNC) &_biox_read_fa, 1},
+    {"_biox_read_fq", (DL_FUNC) &_biox_read_fq, 1},
     {"_biox_rcpp_hello_world", (DL_FUNC) &_biox_rcpp_hello_world, 0},
     {"_biox_rdna", (DL_FUNC) &_biox_rdna, 2},
     {"_biox_rrna", (DL_FUNC) &_biox_rrna, 2},

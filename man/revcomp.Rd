@@ -13,6 +13,6 @@ revcomp(ss)
 reverse complement seq
 }
 \examples{
-revcom(c("AGCT", "AAAA"))
+revcomp(c("AGCT", "AAAA"))
 
 }

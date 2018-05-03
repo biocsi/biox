@@ -25,8 +25,8 @@ DataFrame read_fa(String file) {
       // name begin
       state = 0;
       if(count == 0) {
-        count++;
         c0 = c;
+        count++;
         continue;
       } else if ((count & 0xfff) == 0) {
         Rprintf("count = %d", count);

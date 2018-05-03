@@ -1,0 +1,20 @@
+# basic bio tools using Rcpp
+
+# install
+```{r}
+devtools::install_github("zengfengbo/biox")
+```
+
+# usage
+```{r}
+biox::kmers("AGCTAAAA")
+
+biox::rdna()
+
+biox::rrna()
+
+biox::revcomp("AAGG")
+
+```
+
+
