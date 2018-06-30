@@ -15,6 +15,10 @@ biox::rrna()
 
 biox::revcomp("AAGG")
 
+biox::dimer("AGGC", "CCCC")
+
+biox::tm(c("AGGC", "CCCC"))
+
 ```
 
 
