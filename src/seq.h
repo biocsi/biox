@@ -22,6 +22,64 @@ inline String revcomp0(const char * p) {
       *p2 = 'C'; break;
     case 'C':
       *p2 = 'G'; break;
+    case 'a':
+      *p2 = 't'; break;
+    case 't':
+      *p2 = 'a'; break;
+    case 'g':
+      *p2 = 'c'; break;
+    case 'c':
+      *p2 = 'g'; break;
+      
+    case 'N':
+      *p2 = 'N'; break;
+    case 'n':
+      *p2 = 'n'; break;
+      
+    case 'R':
+      *p2 = 'Y'; break;
+    case 'Y':
+      *p2 = 'R'; break;
+    case 'M':
+      *p2 = 'K'; break;
+    case 'K':
+      *p2 = 'M'; break;
+    case 'S':
+      *p2 = 'W'; break;
+    case 'W':
+      *p2 = 'S'; break;
+    case 'H':
+      *p2 = 'D'; break;
+    case 'B':
+      *p2 = 'V'; break;
+    case 'V':
+      *p2 = 'B'; break;
+    case 'D':
+      *p2 = 'H'; break;
+      
+    case 'r':
+      *p2 = 'y'; break;
+    case 'y':
+      *p2 = 'r'; break;
+    case 'm':
+      *p2 = 'k'; break;
+    case 'k':
+      *p2 = 'm'; break;
+    case 's':
+      *p2 = 'w'; break;
+    case 'w':
+      *p2 = 's'; break;
+    case 'h':
+      *p2 = 'd'; break;
+    case 'b':
+      *p2 = 'v'; break;
+    case 'v':
+      *p2 = 'b'; break;
+    case 'd':
+      *p2 = 'h'; break;
+      
+    default:
+      *p2 = 'X'; break;
     }
     p2--;
   }

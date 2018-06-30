@@ -27,37 +27,3 @@ StringVector revcomp(StringVector ss) {
   }
   return ss2;
 }
-
-
-//' kmers
-//' @param s seq
-//' @param k kmer size
-//' @examples
-//' kmers("AGCTTTTTTTTT")
-//' kmers("AGCTTTTTTTTT", 4)
-//' 
-//' @export
-//' 
-// [[Rcpp::export]]
-StringVector kmers(String s, int k = 3) {
-  const char * p = s.get_cstring();
-  int len = strlen(p);
-  if(len < k ) { stop("error, string' len must longer than k"); }
-  
-  StringVector kms(len-k+1);
-  char *p2_begin, *p2;
-  p2 = p2_begin = new char[len+1];
-  strcpy(p2, p);
-  
-  for(int offset = 0; offset <= len - k ; offset++){
-    // Rprintf("offset: %d\n", offset);
-    p2 = p2_begin + offset;
-    p2[k] = '\0';
-    String si(p2);
-    kms[offset] = si;
-    p2[k] = p[k];
-  }
-  
-  delete[] p2_begin;
-  return kms;
-}

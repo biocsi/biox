@@ -4,12 +4,14 @@
 \alias{kmers}
 \title{kmers}
 \usage{
-kmers(s, k = 3L)
+kmers(s, bin = 3L, step = 1L)
 }
 \arguments{
 \item{s}{seq}
 
-\item{k}{kmer size}
+\item{bin}{kmer size}
+
+\item{step}{kmer step}
 }
 \description{
 kmers
