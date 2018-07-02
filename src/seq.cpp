@@ -22,7 +22,7 @@ StringVector revcomp(StringVector ss) {
   StringVector ss2(l);
   
   #pragma omp parallel for
-  for(int i = 0; i < l; i++) {
+  for(int i = 0; i < l; ++i) {
     ss2[i] = revcomp_(ss[i]);
   }
   return ss2;

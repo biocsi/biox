@@ -6,8 +6,8 @@ using namespace Rcpp;
 
 //' kmers
 //' @param s seq
-//' @param bin kmer size
-//' @param step kmer step
+//' @param bin kmer count size
+//' @param step kmer count step
 //' @examples
 //' kmers("AGCTTTTTTTTT")
 //' kmers("AGCTTTTTTTTT", 4)
@@ -67,7 +67,7 @@ StringVector kmers_tm(String s, float t0, float dt=1) {
     p2_begin++; offset++;
     
     int size = 0;
-    for(p2_end = p2_begin; *p2_end != '\0'; size++) {
+    for(p2_end = p2_begin; *p2_end != '\0'; ++size) {
       p2_end++;
       c = *p2_end;
       *p2_end = '\0';
