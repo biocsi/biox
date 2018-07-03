@@ -101,16 +101,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP _biox_rcpp_hello_world() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello_world());
-    return rcpp_result_gen;
-END_RCPP
-}
 // rdna
 StringVector rdna(int n, int l);
 RcppExport SEXP _biox_rdna(SEXP nSEXP, SEXP lSEXP) {
@@ -135,6 +125,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rpro
+StringVector rpro(int n, int l);
+RcppExport SEXP _biox_rpro(SEXP nSEXP, SEXP lSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type l(lSEXP);
+    rcpp_result_gen = Rcpp::wrap(rpro(n, l));
+    return rcpp_result_gen;
+END_RCPP
+}
 // revcomp
 StringVector revcomp(StringVector ss);
 RcppExport SEXP _biox_revcomp(SEXP ssSEXP) {
@@ -143,6 +145,29 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< StringVector >::type ss(ssSEXP);
     rcpp_result_gen = Rcpp::wrap(revcomp(ss));
+    return rcpp_result_gen;
+END_RCPP
+}
+// transcribe
+StringVector transcribe(StringVector ss);
+RcppExport SEXP _biox_transcribe(SEXP ssSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< StringVector >::type ss(ssSEXP);
+    rcpp_result_gen = Rcpp::wrap(transcribe(ss));
+    return rcpp_result_gen;
+END_RCPP
+}
+// translate
+StringVector translate(StringVector ss, int offset);
+RcppExport SEXP _biox_translate(SEXP ssSEXP, SEXP offsetSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< StringVector >::type ss(ssSEXP);
+    Rcpp::traits::input_parameter< int >::type offset(offsetSEXP);
+    rcpp_result_gen = Rcpp::wrap(translate(ss, offset));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -167,10 +192,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_biox_read_fq", (DL_FUNC) &_biox_read_fq, 1},
     {"_biox_kmers", (DL_FUNC) &_biox_kmers, 3},
     {"_biox_kmers_tm", (DL_FUNC) &_biox_kmers_tm, 3},
-    {"_biox_rcpp_hello_world", (DL_FUNC) &_biox_rcpp_hello_world, 0},
     {"_biox_rdna", (DL_FUNC) &_biox_rdna, 2},
     {"_biox_rrna", (DL_FUNC) &_biox_rrna, 2},
+    {"_biox_rpro", (DL_FUNC) &_biox_rpro, 2},
     {"_biox_revcomp", (DL_FUNC) &_biox_revcomp, 1},
+    {"_biox_transcribe", (DL_FUNC) &_biox_transcribe, 1},
+    {"_biox_translate", (DL_FUNC) &_biox_translate, 2},
     {"_biox_tm", (DL_FUNC) &_biox_tm, 1},
     {NULL, NULL, 0}
 };

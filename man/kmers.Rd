@@ -9,9 +9,9 @@ kmers(s, bin = 3L, step = 1L)
 \arguments{
 \item{s}{seq}
 
-\item{bin}{kmer size}
+\item{bin}{kmer count size}
 
-\item{step}{kmer step}
+\item{step}{kmer count step}
 }
 \description{
 kmers

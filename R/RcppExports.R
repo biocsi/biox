@@ -37,8 +37,8 @@ read_fq <- function(file) {
 
 #' kmers
 #' @param s seq
-#' @param bin kmer size
-#' @param step kmer step
+#' @param bin kmer count size
+#' @param step kmer count step
 #' @examples
 #' kmers("AGCTTTTTTTTT")
 #' kmers("AGCTTTTTTTTT", 4)
@@ -59,16 +59,16 @@ kmers_tm <- function(s, t0, dt = 1) {
     .Call(`_biox_kmers_tm`, s, t0, dt)
 }
 
-rcpp_hello_world <- function() {
-    .Call(`_biox_rcpp_hello_world`)
-}
-
 rdna <- function(n = 1L, l = 20L) {
     .Call(`_biox_rdna`, n, l)
 }
 
 rrna <- function(n = 1L, l = 20L) {
     .Call(`_biox_rrna`, n, l)
+}
+
+rpro <- function(n = 1L, l = 20L) {
+    .Call(`_biox_rpro`, n, l)
 }
 
 #' reverse complement seq
@@ -79,6 +79,24 @@ rrna <- function(n = 1L, l = 20L) {
 #' @export
 revcomp <- function(ss) {
     .Call(`_biox_revcomp`, ss)
+}
+
+#' transcription, from DNA to RNA
+#' @examples
+#' transcribe("AGCT") # "AGCU"
+#' 
+#' @export
+transcribe <- function(ss) {
+    .Call(`_biox_transcribe`, ss)
+}
+
+#' translation, from RNA to AA
+#' @examples
+#' transcribe("AGCU") # "AGCU"
+#' 
+#' @export
+translate <- function(ss, offset = 0L) {
+    .Call(`_biox_translate`, ss, offset)
 }
 
 #' @export

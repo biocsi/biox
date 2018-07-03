@@ -4,6 +4,29 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+inline int base_code(char c) {
+  int i = 0;
+  switch(c) {
+  case 'U':
+    i = 0; break;
+  case 'C':
+    i = 1; break;
+  case 'A':
+    i = 2; break;
+  case 'G':
+    i = 3; break;
+  default:
+    i = 64; break;
+  }
+  return i;
+}
+
+inline int base3_code(char b1, char b2, char b3) {
+  int code = base_code(b1) * 16 + base_code(b2) * 4 + base_code(b3);
+  if (code >= 64) { code = 64; }
+  return code;
+}
+
 inline String revcomp0(const char * p) {
   // const char * p = s.get_cstring();
   int l = strlen(p);
@@ -84,6 +107,173 @@ inline String revcomp0(const char * p) {
     p2--;
   }
 
+  String s2(p2_begin);
+  delete [] p2_begin;
+  return s2;
+}
+
+inline String transcribe0(const char * p) {
+  // const char * p = s.get_cstring();
+  int l = strlen(p);
+  char * p2_begin =  new char[l+1];
+  char * p2 = p2_begin;
+  
+  char c = '\0';
+  for (int i =0; i <= l; ++i) {
+    c = *(p+i);
+    switch (c) {
+    case 'T':
+      *(p2+i) = 'U'; break;
+    default:
+      *(p2+i) = c;
+    }
+  }
+  String s2(p2_begin);
+  delete [] p2_begin;
+  return s2;
+}
+
+inline String translate1(const char * p, int offset) {
+  // const char * p = s.get_cstring();
+  const char * pi = p + offset;
+  int l = strlen(pi);
+  int l2 = l/3 + 1;
+  char * p2_begin =  new char[l2];
+  char * p2 = p2_begin;
+  
+  char b1, b2, b3;
+  
+  for (int i =0; i < l2 - 1; ++i) {
+    b1 = *(pi + (3*i));
+    b2 = *(pi + (3*i) + 1);
+    b3 = *(pi + (3*i) + 2);
+    if      (b1 == 'U' && b2 == 'U' && b3 == 'U') { *(p2+i) = 'F'; } 
+    else if (b1 == 'U' && b2 == 'U' && b3 == 'C') { *(p2+i) = 'F'; }
+    else if (b1 == 'U' && b2 == 'U' && b3 == 'A') { *(p2+i) = 'L'; }
+    else if (b1 == 'U' && b2 == 'U' && b3 == 'G') { *(p2+i) = 'L'; }
+    
+    else if (b1 == 'U' && b2 == 'C' && b3 == 'U') { *(p2+i) = 'S'; } 
+    else if (b1 == 'U' && b2 == 'C' && b3 == 'C') { *(p2+i) = 'S'; }
+    else if (b1 == 'U' && b2 == 'C' && b3 == 'A') { *(p2+i) = 'S'; }
+    else if (b1 == 'U' && b2 == 'C' && b3 == 'G') { *(p2+i) = 'S'; }
+    
+    else if (b1 == 'U' && b2 == 'A' && b3 == 'U') { *(p2+i) = 'Y'; } 
+    else if (b1 == 'U' && b2 == 'A' && b3 == 'C') { *(p2+i) = 'Y'; }
+    else if (b1 == 'U' && b2 == 'A' && b3 == 'A') { *(p2+i) = '.'; }
+    else if (b1 == 'U' && b2 == 'A' && b3 == 'G') { *(p2+i) = '.'; }
+    
+    else if (b1 == 'U' && b2 == 'G' && b3 == 'U') { *(p2+i) = 'C'; } 
+    else if (b1 == 'U' && b2 == 'G' && b3 == 'C') { *(p2+i) = 'C'; }
+    else if (b1 == 'U' && b2 == 'G' && b3 == 'A') { *(p2+i) = '.'; }
+    else if (b1 == 'U' && b2 == 'G' && b3 == 'G') { *(p2+i) = 'W'; }
+    
+    else if (b1 == 'C' && b2 == 'U' && b3 == 'U') { *(p2+i) = 'L'; } 
+    else if (b1 == 'C' && b2 == 'U' && b3 == 'C') { *(p2+i) = 'L'; }
+    else if (b1 == 'C' && b2 == 'U' && b3 == 'A') { *(p2+i) = 'L'; }
+    else if (b1 == 'C' && b2 == 'U' && b3 == 'G') { *(p2+i) = 'L'; }
+    
+    else if (b1 == 'C' && b2 == 'C' && b3 == 'U') { *(p2+i) = 'P'; } 
+    else if (b1 == 'C' && b2 == 'C' && b3 == 'C') { *(p2+i) = 'P'; }
+    else if (b1 == 'C' && b2 == 'C' && b3 == 'A') { *(p2+i) = 'P'; }
+    else if (b1 == 'C' && b2 == 'C' && b3 == 'G') { *(p2+i) = 'P'; }
+    
+    else if (b1 == 'C' && b2 == 'A' && b3 == 'U') { *(p2+i) = 'H'; } 
+    else if (b1 == 'C' && b2 == 'A' && b3 == 'C') { *(p2+i) = 'H'; }
+    else if (b1 == 'C' && b2 == 'A' && b3 == 'A') { *(p2+i) = 'Q'; }
+    else if (b1 == 'C' && b2 == 'A' && b3 == 'G') { *(p2+i) = 'Q'; }
+    
+    else if (b1 == 'C' && b2 == 'G' && b3 == 'U') { *(p2+i) = 'R'; } 
+    else if (b1 == 'C' && b2 == 'G' && b3 == 'C') { *(p2+i) = 'R'; }
+    else if (b1 == 'C' && b2 == 'G' && b3 == 'A') { *(p2+i) = 'R'; }
+    else if (b1 == 'C' && b2 == 'G' && b3 == 'G') { *(p2+i) = 'R'; }
+    
+    else if (b1 == 'A' && b2 == 'U' && b3 == 'U') { *(p2+i) = 'I'; } 
+    else if (b1 == 'A' && b2 == 'U' && b3 == 'C') { *(p2+i) = 'I'; }
+    else if (b1 == 'A' && b2 == 'U' && b3 == 'A') { *(p2+i) = 'M'; }
+    else if (b1 == 'A' && b2 == 'U' && b3 == 'G') { *(p2+i) = 'M'; }
+    
+    else if (b1 == 'A' && b2 == 'C' && b3 == 'U') { *(p2+i) = 'T'; } 
+    else if (b1 == 'A' && b2 == 'C' && b3 == 'C') { *(p2+i) = 'T'; }
+    else if (b1 == 'A' && b2 == 'C' && b3 == 'A') { *(p2+i) = 'T'; }
+    else if (b1 == 'A' && b2 == 'C' && b3 == 'G') { *(p2+i) = 'T'; }
+    
+    else if (b1 == 'A' && b2 == 'A' && b3 == 'U') { *(p2+i) = 'N'; } 
+    else if (b1 == 'A' && b2 == 'A' && b3 == 'C') { *(p2+i) = 'N'; }
+    else if (b1 == 'A' && b2 == 'A' && b3 == 'A') { *(p2+i) = 'K'; }
+    else if (b1 == 'A' && b2 == 'A' && b3 == 'G') { *(p2+i) = 'K'; }
+    
+    else if (b1 == 'A' && b2 == 'G' && b3 == 'U') { *(p2+i) = 'S'; } 
+    else if (b1 == 'A' && b2 == 'G' && b3 == 'C') { *(p2+i) = 'S'; }
+    else if (b1 == 'A' && b2 == 'G' && b3 == 'A') { *(p2+i) = 'R'; }
+    else if (b1 == 'A' && b2 == 'G' && b3 == 'G') { *(p2+i) = 'R'; }
+    
+    else if (b1 == 'G' && b2 == 'U' && b3 == 'U') { *(p2+i) = 'V'; } 
+    else if (b1 == 'G' && b2 == 'U' && b3 == 'C') { *(p2+i) = 'V'; }
+    else if (b1 == 'G' && b2 == 'U' && b3 == 'A') { *(p2+i) = 'V'; }
+    else if (b1 == 'G' && b2 == 'U' && b3 == 'G') { *(p2+i) = 'V'; }
+    
+    else if (b1 == 'G' && b2 == 'C' && b3 == 'U') { *(p2+i) = 'A'; } 
+    else if (b1 == 'G' && b2 == 'C' && b3 == 'C') { *(p2+i) = 'A'; }
+    else if (b1 == 'G' && b2 == 'C' && b3 == 'A') { *(p2+i) = 'A'; }
+    else if (b1 == 'G' && b2 == 'C' && b3 == 'G') { *(p2+i) = 'A'; }
+    
+    else if (b1 == 'G' && b2 == 'A' && b3 == 'U') { *(p2+i) = 'D'; } 
+    else if (b1 == 'G' && b2 == 'A' && b3 == 'C') { *(p2+i) = 'D'; }
+    else if (b1 == 'G' && b2 == 'A' && b3 == 'A') { *(p2+i) = 'E'; }
+    else if (b1 == 'G' && b2 == 'A' && b3 == 'G') { *(p2+i) = 'E'; }
+    
+    else if (b1 == 'G' && b2 == 'G' && b3 == 'U') { *(p2+i) = 'G'; } 
+    else if (b1 == 'G' && b2 == 'G' && b3 == 'C') { *(p2+i) = 'G'; }
+    else if (b1 == 'G' && b2 == 'G' && b3 == 'A') { *(p2+i) = 'G'; }
+    else if (b1 == 'G' && b2 == 'G' && b3 == 'G') { *(p2+i) = 'G'; }
+    
+    else                                          { *(p2+i) = '*'; }
+  }
+  String s2(p2_begin);
+  delete [] p2_begin;
+  return s2;
+}
+
+inline String translate0(const char * p, int offset) {
+  // const char * p = s.get_cstring();
+  const char * pi = p + offset;
+  int l = strlen(pi);
+  int l2 = l/3 + 1;
+  char * p2_begin =  new char[l2];
+  char * p2 = p2_begin;
+  
+  char b1, b2, b3;
+  
+  char genetic_codes[65] = { 
+    'F', 'F', 'L', 'L',
+    'S', 'S', 'S', 'S',
+    'Y', 'Y', '.', '.',
+    'C', 'C', '.', 'W',
+    
+    'L', 'L', 'L', 'L',
+    'P', 'P', 'P', 'P',
+    'H', 'H', 'Q', 'Q',
+    'R', 'R', 'R', 'R',
+    
+    'I', 'I', 'M', 'M',
+    'T', 'T', 'T', 'T',
+    'N', 'N', 'K', 'K',
+    'S', 'S', 'R', 'R',
+    
+    'V', 'V', 'V', 'V',
+    'A', 'A', 'A', 'A',
+    'D', 'D', 'E', 'E',
+    'G', 'G', 'G', 'G',
+    '*'
+  };
+  
+  for (int i =0; i < l2 - 1; ++i) {
+    b1 = *(pi + (3*i));
+    b2 = *(pi + (3*i) + 1);
+    b3 = *(pi + (3*i) + 2);
+    *(p2+i) = genetic_codes[base3_code(b1, b2, b3)];
+  }
+  
   String s2(p2_begin);
   delete [] p2_begin;
   return s2;
