@@ -10,6 +10,8 @@ License: GPL (>= 2)
 LazyData: TRUE
 RoxygenNote: 6.0.1
 Imports: 
+  tidyverse,
+  data.table,
   Rcpp (>= 0.12.16),
   stringr
 VignetteBuilder: knitr
