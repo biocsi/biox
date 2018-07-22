@@ -22,42 +22,54 @@ StringVector revcomp(StringVector ss) {
   StringVector ss2(l);
   
   #pragma omp parallel for
-  for(int i = 0; i < l; i++) {
+  for(int i = 0; i < l; ++i) {
     ss2[i] = revcomp_(ss[i]);
   }
   return ss2;
 }
 
+String transcribe_(String s) {
+  const char * p = s.get_cstring();
+  return transcribe0(p);
+}
 
-//' kmers
-//' @param s seq
-//' @param k kmer size
+//' transcription, from DNA to RNA
 //' @examples
-//' kmers("AGCTTTTTTTTT")
-//' kmers("AGCTTTTTTTTT", 4)
+//' transcribe("AGCT") # "AGCU"
 //' 
 //' @export
-//' 
 // [[Rcpp::export]]
-StringVector kmers(String s, int k = 3) {
-  const char * p = s.get_cstring();
-  int len = strlen(p);
-  if(len < k ) { stop("error, string' len must longer than k"); }
+StringVector transcribe(StringVector ss) {
+  int l = ss.length();
+  StringVector ss2(l);
   
-  StringVector kms(len-k+1);
-  char *p2_begin, *p2;
-  p2 = p2_begin = new char[len+1];
-  strcpy(p2, p);
-  
-  for(int offset = 0; offset <= len - k ; offset++){
-    // Rprintf("offset: %d\n", offset);
-    p2 = p2_begin + offset;
-    p2[k] = '\0';
-    String si(p2);
-    kms[offset] = si;
-    p2[k] = p[k];
+  #pragma omp parallel for
+  for(int i = 0; i < l; ++i) {
+    ss2[i] = transcribe_(ss[i]);
   }
-  
-  delete[] p2_begin;
-  return kms;
+  return ss2;
 }
+
+
+String translate_(String s, int offset) {
+  const char * p = s.get_cstring();
+  return translate0(p, offset);
+}
+
+//' translation, from RNA to AA
+//' @examples
+//' transcribe("AGCU") # "AGCU"
+//' 
+//' @export
+// [[Rcpp::export]]
+StringVector translate(StringVector ss, int offset = 0) {
+  int l = ss.length();
+  StringVector ss2(l);
+  
+#pragma omp parallel for
+  for(int i = 0; i < l; ++i) {
+    ss2[i] = translate_(ss[i], offset);
+  }
+  return ss2;
+}
+
