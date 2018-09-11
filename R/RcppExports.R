@@ -63,6 +63,14 @@ rdna <- function(n = 1L, l = 20L) {
     .Call(`_biox_rdna`, n, l)
 }
 
+int2seq <- function(num, len) {
+    .Call(`_biox_int2seq`, num, len)
+}
+
+dnas <- function(l) {
+    .Call(`_biox_dnas`, l)
+}
+
 rrna <- function(n = 1L, l = 20L) {
     .Call(`_biox_rrna`, n, l)
 }

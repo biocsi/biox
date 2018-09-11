@@ -26,6 +26,33 @@ StringVector rdna(int n = 1, int l = 20) {
   return ss;
 }
 
+// [[Rcpp::export]]
+String int2seq(unsigned int num, int len) {
+  char * p = new char[len+1];
+  *(p+len) = '\0';
+  char bases[4] = {'A', 'G', 'C', 'T'};
+  
+  unsigned int n = num;
+  for(int i =0; i < len; i++) {
+    *(p+i) = bases[n%4];
+    n = n / 4;
+  }
+  String s(p);
+  return s;
+}
+
+
+// [[Rcpp::export]]
+StringVector dnas(int l) {
+  unsigned int n = 1 << (2*l);
+  StringVector ss(n);
+  char bases[4] = {'A', 'G', 'C', 'T'};
+  for(unsigned int i = 0; i < n; i++) {
+    ss[i] = int2seq(i, l);
+  }
+  return ss;
+}
+
 String rRNA0(int l) {
   char * p = new char[l+1];
   *(p+l) = '\0';

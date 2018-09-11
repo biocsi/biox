@@ -8,7 +8,7 @@ Maintainer: bobo <529063092@qq.com>
 Description: bio base tools
 License: GPL (>= 2)
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Imports: 
     tidyverse,
     data.table,
