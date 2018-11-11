@@ -8,7 +8,7 @@ Maintainer: bobo <529063092@qq.com>
 Description: bio base tools
 License: GPL (>= 2)
 LazyData: TRUE
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Imports: 
     tidyverse,
     data.table,
@@ -17,3 +17,5 @@ Imports:
 VignetteBuilder: knitr
 LinkingTo: Rcpp, RcppParallel
 SystemRequirements: GNU make
+Encoding: UTF-8
+ByteCompile: TRUE
