@@ -205,3 +205,32 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+RcppExport SEXP str_rev(SEXP);
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_biox_dimer", (DL_FUNC) &_biox_dimer, 2},
+    {"_biox_dimer_v", (DL_FUNC) &_biox_dimer_v, 2},
+    {"_biox_dimer_test", (DL_FUNC) &_biox_dimer_test, 2},
+    {"_biox_dimer_tm_v", (DL_FUNC) &_biox_dimer_tm_v, 2},
+    {"_biox_read_fa", (DL_FUNC) &_biox_read_fa, 1},
+    {"_biox_read_fq", (DL_FUNC) &_biox_read_fq, 1},
+    {"_biox_kmers", (DL_FUNC) &_biox_kmers, 3},
+    {"_biox_kmers_tm", (DL_FUNC) &_biox_kmers_tm, 3},
+    {"_biox_rdna", (DL_FUNC) &_biox_rdna, 2},
+    {"_biox_int2seq", (DL_FUNC) &_biox_int2seq, 2},
+    {"_biox_dnas", (DL_FUNC) &_biox_dnas, 1},
+    {"_biox_rrna", (DL_FUNC) &_biox_rrna, 2},
+    {"_biox_rpro", (DL_FUNC) &_biox_rpro, 2},
+    {"_biox_revcomp", (DL_FUNC) &_biox_revcomp, 1},
+    {"_biox_transcribe", (DL_FUNC) &_biox_transcribe, 1},
+    {"_biox_translate", (DL_FUNC) &_biox_translate, 2},
+    {"_biox_tm", (DL_FUNC) &_biox_tm, 1},
+    {"str_rev",          (DL_FUNC) &str_rev,          1},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_biox(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}

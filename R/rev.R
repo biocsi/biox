@@ -10,7 +10,7 @@
 #' x <- c("ABC", "DEF", "GHIJ")
 #' rev(x)
 rev <- function(x) {
-  tmp <- .Call("Cstr_rev", as.character(x))
+  tmp <- .Call("str_rev", as.character(x))
   tmp[ is.na(x) ] <- NA
   return(tmp)
 }

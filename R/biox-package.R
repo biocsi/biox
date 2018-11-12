@@ -4,6 +4,7 @@
 ##' 
 ##' @name biox
 ##' @docType package
-##' @useDynLib biox, .registration=TRUE, .fixes = "C"
+##' @useDynLib biox, .registration=TRUE
+##' @import Rcpp
 ##' @seealso \code{\link{html}}
 NULL
