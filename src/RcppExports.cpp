@@ -226,7 +226,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_biox_transcribe", (DL_FUNC) &_biox_transcribe, 1},
     {"_biox_translate", (DL_FUNC) &_biox_translate, 2},
     {"_biox_tm", (DL_FUNC) &_biox_tm, 1},
-    {"str_rev",          (DL_FUNC) &str_rev,          1},
+    {"str_rev", (DL_FUNC) &str_rev, 1},
     {NULL, NULL, 0}
 };
 

@@ -16,6 +16,7 @@ String rDNA0(int l) {
   return s;
 }
 
+//' @export
 // [[Rcpp::export]]
 StringVector rdna(int n = 1, int l = 20) {
   StringVector ss(n);
@@ -26,6 +27,7 @@ StringVector rdna(int n = 1, int l = 20) {
   return ss;
 }
 
+//' @export
 // [[Rcpp::export]]
 String int2seq(unsigned int num, int len) {
   char * p = new char[len+1];
@@ -42,6 +44,7 @@ String int2seq(unsigned int num, int len) {
 }
 
 
+//' @export
 // [[Rcpp::export]]
 StringVector dnas(int l) {
   unsigned int n = 1 << (2*l);
@@ -66,6 +69,7 @@ String rRNA0(int l) {
   return s;
 }
 
+//' @export
 // [[Rcpp::export]]
 StringVector rrna(int n = 1, int l = 20) {
   StringVector ss(n);
@@ -93,6 +97,7 @@ String rPro0(int l) {
   return s;
 }
 
+//' @export
 // [[Rcpp::export]]
 StringVector rpro(int n = 1, int l = 20) {
   StringVector ss(n);

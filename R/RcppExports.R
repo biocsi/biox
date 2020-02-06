@@ -59,22 +59,27 @@ kmers_tm <- function(s, t0, dt = 1) {
     .Call(`_biox_kmers_tm`, s, t0, dt)
 }
 
+#' @export
 rdna <- function(n = 1L, l = 20L) {
     .Call(`_biox_rdna`, n, l)
 }
 
+#' @export
 int2seq <- function(num, len) {
     .Call(`_biox_int2seq`, num, len)
 }
 
+#' @export
 dnas <- function(l) {
     .Call(`_biox_dnas`, l)
 }
 
+#' @export
 rrna <- function(n = 1L, l = 20L) {
     .Call(`_biox_rrna`, n, l)
 }
 
+#' @export
 rpro <- function(n = 1L, l = 20L) {
     .Call(`_biox_rpro`, n, l)
 }

@@ -21,7 +21,7 @@ StringVector revcomp(StringVector ss) {
   int l = ss.length();
   StringVector ss2(l);
   
-  #pragma omp parallel for
+//  #pragma omp parallel for
   for(int i = 0; i < l; ++i) {
     ss2[i] = revcomp_(ss[i]);
   }
@@ -43,7 +43,7 @@ StringVector transcribe(StringVector ss) {
   int l = ss.length();
   StringVector ss2(l);
   
-  #pragma omp parallel for
+//  #pragma omp parallel for
   for(int i = 0; i < l; ++i) {
     ss2[i] = transcribe_(ss[i]);
   }
@@ -66,7 +66,7 @@ StringVector translate(StringVector ss, int offset = 0) {
   int l = ss.length();
   StringVector ss2(l);
   
-#pragma omp parallel for
+//#pragma omp parallel for
   for(int i = 0; i < l; ++i) {
     ss2[i] = translate_(ss[i], offset);
   }
